@@ -25,6 +25,31 @@ docker-compose.yml
 
 ## Quick Start
 
+### Development with GitHub Codespaces (recommended)
+1. **Fork** this repository to your own GitHub account (if you haven’t already).
+2. In GitHub, click the **"Code"** button and select **"Open with Codespaces"** → **"Create new codespace"**.
+3. The Codespace will automatically spin up the **devcontainer** defined in `.devcontainer/devcontainer.json`. This container runs `docker compose` for you, so PostgreSQL and the Python app are ready.
+4. In the terminal that opens inside the Codespace run:
+   ```bash
+   docker compose up -d   # start Postgres and the app container
+   python src/ingestion/generate_sample_data.py   # generate CSVs
+   python src/ingestion/load_data.py              # load data into Postgres
+   uvicorn src/api/app:app --host 0.0.0.0 --port 8000   # start the FastAPI server
+   ```
+5. VS Code will expose port 8000 – click the **"Ports"** tab, then the **"Preview"** button to open the API in your browser. You can now call endpoints like `http://localhost:8000/customers`.
+
+### Temporary demo with Play‑With‑Docker (no GitHub account needed)
+1. Open https://labs.play-with-docker.com/ and start a new session.
+2. Drag‑and‑drop the repository files (or zip) into the terminal.
+3. Run `docker compose up -d` and follow the same steps as above.
+
+### Running locally (if you have Docker installed)
+1. Install Docker Desktop.
+2. From the project root run `docker compose up -d`.
+3. Follow steps 4‑5 from the Codespaces section.
+
+---
+
 ### Prerequisites
 - Docker
 - Python 3.10+
